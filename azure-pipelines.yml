@@ -1,6 +1,12 @@
 trigger:
-- master
-- feature
+  branches:
+    include:
+    - master
+    - feature/*
+    - refs/tags/mytag
+    exclude:
+    - test/*
+    - refs/tags/yourtag
 
 pool:
   vmImage: 'ubuntu-latest'
