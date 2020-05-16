@@ -9,6 +9,7 @@ trigger:
     - refs/tags/yourtag
   paths:
     # must have branches defined to use paths
+    # can not exclude and then include path unless going deeper
     include:
     - development/*
     exclude:
