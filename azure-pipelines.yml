@@ -7,6 +7,12 @@ trigger:
     exclude:
     - test/*
     - refs/tags/yourtag
+  paths:
+    # must have branches defined to use paths
+    include:
+    - development/*
+    exclude:
+    - README.md
 
 pool:
   vmImage: 'ubuntu-latest'
