@@ -1,28 +1,27 @@
-trigger:
-  - master
-  
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+      - release-*
+    exclude:
+      - 'release-1'
+  paths:
+    include:
+      - development/main/*
+    exclude:
+      - development
+
 pool:
   vmImage: 'ubuntu-latest'
 
-stages:
-  - stage: validate_and_test
-    jobs:
-      - job: validate
-        steps:
-        - script: echo checking code quality
-          displayName: 'validate code'
-      - job: test
-        dependsOn: validate
-        steps:
-        - script: echo running unit tests
-          displayName: 'unit testing'
-  - stage: build_and_archive
-    dependsOn: validate_and_test
-    jobs:
-      - job: build
-        steps:
-        - script: echo compiling code
-          displayName: 'build code'
-        - script: echo archiving
-          displayName: 'archiving artifact'
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
 
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+  
