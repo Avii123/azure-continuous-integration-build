@@ -1,16 +1,10 @@
-pr:
-  autoCancel: true
+trigger:
   branches:
     include:
       - master
-      - release-*
-    exclude:
-      - 'release-1'
   paths:
     include:
-      - development/main/*
-    exclude:
-      - development
+      - development/*
 
 pool:
   vmImage: 'ubuntu-latest'
