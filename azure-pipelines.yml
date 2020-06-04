@@ -26,15 +26,23 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-  - stage: testing
+  - stage: validate_and_test
     jobs:
-      - job: integration_testing
+      - job: validate
         steps:
-          - script: echo run integration tests
-            displayName: 'Run integration tests'
-  - stage: stress_testing
+        - script: echo checking code quality
+          displayName: 'validate code'
+      - job: test
+        dependsOn: validate
+        steps:
+        - script: echo running unit tests
+          displayName: 'unit testing'
+  - stage: build_and_archive
+    dependsOn: validate_and_test
     jobs:
-      - job: stress_testing
+      - job: build
         steps:
-          - script: echo run stress tests
-            displayName: 'Run stress tests'
+        - script: echo compiling code
+          displayName: 'build code'
+        - script: echo archiving
+          displayName: 'archiving artifact'
