@@ -1,6 +1,26 @@
 trigger:
-- master
-- release-*
+  branches:
+    include:
+      - master
+      - 'release-*'
+  paths:
+    exclude:
+      - 'development/*'
+    include: 
+      - 'development/main/*'
+  tags:
+    include:
+      - '*'
+
+pr:
+  branches:
+    include:
+      - 'master'
+  paths:
+    exclude:
+      - 'development/*'
+    include: 
+      - 'development/main/*'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -9,11 +29,11 @@ stages:
   - stage: testing
     jobs:
       - job: integration_testing
-
         steps:
           - script: echo run integration tests
             displayName: 'Run integration tests'
-
+  - stage: stress_testing
+    jobs:
       - job: stress_testing
         steps:
           - script: echo run stress tests
