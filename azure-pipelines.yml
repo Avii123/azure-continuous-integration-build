@@ -1,19 +1,20 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- hybrid-build-implementation
+- master
+- release-*
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: testing
+    jobs:
+      - job: integration_testing
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+        steps:
+          - script: echo run integration tests
+            displayName: 'Run integration tests'
+
+      - job: stress_testing
+        steps:
+          - script: echo run stress tests
+            displayName: 'Run stress tests'

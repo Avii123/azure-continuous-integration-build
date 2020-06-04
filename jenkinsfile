@@ -2,13 +2,24 @@ pipeline {
     agent any
 
     stages {
+        stage('Test') {
+            steps {
+                echo 'Testing ...'
+            }
+        }
         stage('Build') {
             steps {
-                echo 'Modifying temp.txt ...'
-                echo "adding a new line" >> temp.txt
-                git add .
-                git commit -m "added artifact"
-                git push
+                echo 'Building ...'
+            }
+        }
+        stage('Artifact') {
+            steps {
+                echo 'Saving artifact ...'
+            }
+        }
+        stage('Next') {
+            steps {
+                echo 'Kicking off azp ...'
             }
         }
     }
